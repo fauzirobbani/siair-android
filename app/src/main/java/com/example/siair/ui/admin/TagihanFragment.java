@@ -74,18 +74,16 @@ public class TagihanFragment extends Fragment {
             }
         });
 
-        initView();
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
+        rvTagihan.setLayoutManager(layoutManager);
+        tagihanAdapter = new TagihanAdapter(getActivity().getApplicationContext());
 
-    }
-
-    private void initView () {
         tagihanViewModel.setTagihanAll();
+
     }
 
     private void getTagihanSuccess (ArrayList<Tagihan> tagihans) {
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
-        rvTagihan.setLayoutManager(layoutManager);
-        tagihanAdapter = new TagihanAdapter(tagihans);
+        tagihanAdapter.setTagihan(tagihans);
         rvTagihan.setAdapter(tagihanAdapter);
     }
 

@@ -12,14 +12,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity android:name=".ui.admin.TambahTagihanActivity"></activity>
         <activity android:name=".ui.admin.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.AuthActivity">
-        </activity>
+        <activity android:name=".ui.AuthActivity"></activity>
     </application>
 
 </manifest>

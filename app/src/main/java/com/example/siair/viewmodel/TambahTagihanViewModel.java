@@ -3,8 +3,8 @@ package com.example.siair.viewmodel;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.siair.model.Tagihan;
-import com.example.siair.model.TagihanAllResponse;
+import com.example.siair.model.Pelanggan;
+import com.example.siair.model.PelangganAllResponse;
 import com.example.siair.network.SiairServiceNetwork;
 
 import java.util.ArrayList;
@@ -14,40 +14,40 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
-public class TagihanViewModel extends ViewModel {
+public class TambahTagihanViewModel extends ViewModel {
 
-    private MutableLiveData<ArrayList<Tagihan>> tagihanAll = new MutableLiveData<ArrayList<Tagihan>>();
+    private MutableLiveData<ArrayList<Pelanggan>> pelangganAll = new MutableLiveData<ArrayList<Pelanggan>>();
     private MutableLiveData<Boolean> isLoading = new MutableLiveData<Boolean>();
     private SiairServiceNetwork siairServiceNetwork = new SiairServiceNetwork();
 
-    public void setTagihanAll () {
+    public void setPelangganAll() {
         isLoading.postValue(true);
-        siairServiceNetwork.getService().tagihanAll()
+        siairServiceNetwork.getService().pelangganAll()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(observerTagihanAll());
+                .subscribe(observerPelangganAll());
     }
 
-    private Observer<TagihanAllResponse> observerTagihanAll () {
-        Observer<TagihanAllResponse> observer = new Observer<TagihanAllResponse>() {
+    private Observer<PelangganAllResponse> observerPelangganAll () {
+        Observer<PelangganAllResponse> observer = new Observer<PelangganAllResponse>() {
             @Override
             public void onSubscribe(Disposable d) {
 
             }
 
             @Override
-            public void onNext(TagihanAllResponse tagihanAllResponse) {
-                if (tagihanAllResponse.getStatus()) {
-                    ArrayList<Tagihan> tagihanArrayList = new ArrayList<Tagihan>();
-                    tagihanArrayList.addAll(tagihanAllResponse.getData());
-                    tagihanAll.postValue(tagihanArrayList);
+            public void onNext(PelangganAllResponse pelangganAllResponse) {
+                if (pelangganAllResponse.getStatus()) {
+                    ArrayList<Pelanggan> laporanArrayList = new ArrayList<Pelanggan>();
+                    laporanArrayList.addAll(pelangganAllResponse.getData());
+                    pelangganAll.postValue(laporanArrayList);
                 }
             }
 
             @Override
             public void onError(Throwable e) {
                 isLoading.postValue(false);
-                tagihanAll.postValue(null);
+                pelangganAll.postValue(null);
             }
 
             @Override
@@ -59,8 +59,8 @@ public class TagihanViewModel extends ViewModel {
         return observer;
     }
 
-    public MutableLiveData<ArrayList<Tagihan>> getTagihanAll () {
-        return tagihanAll;
+    public MutableLiveData<ArrayList<Pelanggan>> getLaporanAll () {
+        return pelangganAll;
     }
 
     public MutableLiveData<Boolean> getIsLoading () {

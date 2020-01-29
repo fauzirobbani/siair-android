@@ -3,6 +3,7 @@ package com.example.siair.network;
 import com.example.siair.model.LaporanAllResponse;
 import com.example.siair.model.LoginRequestBody;
 import com.example.siair.model.LoginResponse;
+import com.example.siair.model.PelangganAllResponse;
 import com.example.siair.model.TagihanAllResponse;
 
 import io.reactivex.Observable;
@@ -20,4 +21,7 @@ public interface SiairService {
 
     @GET("laporan")
     Observable<LaporanAllResponse> laporanAll();
+
+    @GET("pelanggan_all")
+    Observable<PelangganAllResponse> pelangganAll();
 }

@@ -9,8 +9,4 @@
         android:id="@+id/navigation_laporan"
         android:title="Laporan" />
 
-    <item
-        android:id="@+id/navigation_logout"
-        android:title="Logout" />
-
 </menu>

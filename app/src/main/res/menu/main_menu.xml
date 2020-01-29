@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/option_menu_tambah_tagihan"
+        android:title="Tambah Tagihan" />
+
+    <item
+        android:id="@+id/option_menu_logout"
+        android:title="Logout" />
+
+</menu>

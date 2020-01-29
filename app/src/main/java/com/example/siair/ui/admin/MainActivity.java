@@ -9,7 +9,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.example.siair.R;
 import com.example.siair.ui.AuthActivity;
@@ -37,7 +39,28 @@ public class MainActivity extends AppCompatActivity {
         navigation = findViewById(R.id.bn_admin);
         navigation.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener);
 
-        loadFragment(new TagihanFragment());
+        loadFragment(tagihanFragment);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.option_menu_tambah_tagihan:
+                Intent toTambahTagihan = new Intent(this, TambahTagihanActivity.class);
+                startActivity(toTambahTagihan);
+                return true;
+            case R.id.option_menu_logout:
+                logout();
+                return true;
+        }
+
+        return false;
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener onNavigationItemSelectedListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -49,9 +72,6 @@ public class MainActivity extends AppCompatActivity {
                     return true;
                 case R.id.navigation_laporan:
                     loadFragment(laporanFragment);
-                    return true;
-                case R.id.navigation_logout:
-                    logout();
                     return true;
             }
 
