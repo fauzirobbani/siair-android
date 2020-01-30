@@ -26,6 +26,13 @@
         android:id="@+id/et_tambah_tagihan_meteran_baru"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Meteran Baru" />
+        android:hint="Meteran Baru"
+        android:inputType="number"/>
+
+    <Button
+        android:id="@+id/btn_tambah_tagihan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TAMBAH TAGIHAN"/>
 
 </LinearLayout>

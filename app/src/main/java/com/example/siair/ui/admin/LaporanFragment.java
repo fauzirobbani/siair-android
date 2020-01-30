@@ -90,7 +90,7 @@ public class LaporanFragment extends Fragment {
     }
 
     private void getLaporanError () {
-        Toast.makeText(getActivity().getApplicationContext(), "Tagihan Error", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity().getApplicationContext(), "Laporan Error", Toast.LENGTH_SHORT).show();
     }
 
     private void showLoading () {

@@ -61,8 +61,8 @@ public class TagihanAdapter extends RecyclerView.Adapter<TagihanAdapter.TagihanV
 
         @Override
         public void onClick(View v) {
-            Tagihan tagihan = tagihans.get(getAdapterPosition());
-            Toast.makeText(context, "Id " + tagihan.getId(), Toast.LENGTH_SHORT).show();
+//            Tagihan tagihan = tagihans.get(getAdapterPosition());
+//            Toast.makeText(context, "Id " + tagihan.getId(), Toast.LENGTH_SHORT).show();
         }
     }
 
