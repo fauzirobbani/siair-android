@@ -10,6 +10,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,6 +34,7 @@ public class LaporanFragment extends Fragment {
     RecyclerView rvLaporan;
     LaporanAdapter laporanAdapter;
     ProgressBar pbLaporanAll;
+    SwipeRefreshLayout swipeRefreshLayout;
 
 
     @Override
@@ -48,6 +50,7 @@ public class LaporanFragment extends Fragment {
 
         rvLaporan = (RecyclerView) view.findViewById(R.id.rv_laporan);
         pbLaporanAll = (ProgressBar) view.findViewById(R.id.pb_laporan_all);
+        swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.refresh_laporan);
 
         laporanViewModel = ViewModelProviders.of(this).get(LaporanViewModel.class);
 
@@ -73,14 +76,22 @@ public class LaporanFragment extends Fragment {
             }
         });
 
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                getLaporan();
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
+
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
         rvLaporan.setLayoutManager(layoutManager);
         laporanAdapter = new LaporanAdapter();
 
-        initView();
+        getLaporan();
     }
 
-    private void initView () {
+    private void getLaporan () {
         laporanViewModel.setLaporanAll();
     }
 
@@ -94,10 +105,12 @@ public class LaporanFragment extends Fragment {
     }
 
     private void showLoading () {
+        rvLaporan.setVisibility(View.GONE);
         pbLaporanAll.setVisibility(View.VISIBLE);
     }
 
     private void hideLoading () {
         pbLaporanAll.setVisibility(View.GONE);
+        rvLaporan.setVisibility(View.VISIBLE);
     }
 }

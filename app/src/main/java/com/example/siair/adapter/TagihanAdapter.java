@@ -19,9 +19,11 @@ public class TagihanAdapter extends RecyclerView.Adapter<TagihanAdapter.TagihanV
 
     ArrayList<Tagihan> tagihans;
     Context context;
+    Boolean modePelanggan;
 
-    public TagihanAdapter(Context context) {
+    public TagihanAdapter(Context context, Boolean modePelanggan) {
         this.context = context;
+        this.modePelanggan = modePelanggan;
     }
 
     public void setTagihan(ArrayList<Tagihan> tagihan) {
@@ -38,9 +40,15 @@ public class TagihanAdapter extends RecyclerView.Adapter<TagihanAdapter.TagihanV
 
     @Override
     public void onBindViewHolder(@NonNull TagihanViewHolder holder, int position) {
-        holder.tvNama.setText(tagihans.get(position).getPelanggan().getNama());
-        holder.tvRekening.setText(String.valueOf(tagihans.get(position).getPelanggan().getRekening()));
-        holder.tvTagihan.setText("Rp." + tagihans.get(position).getTagihan()  + ",-");
+        if (modePelanggan) {
+            holder.tvNama.setText("Rp." + tagihans.get(position).getTagihan()  + ",-");
+            holder.tvRekening.setText(tagihans.get(position).getTanggal());
+            holder.tvTagihan.setText("Volume " + tagihans.get(position).getVolume() + ", Meteran tertulis " + tagihans.get(position).getMeteranBaru());
+        } else {
+            holder.tvNama.setText(tagihans.get(position).getPelanggan().getNama());
+            holder.tvRekening.setText(tagihans.get(position).getPelanggan().getRekening() + " - " + "Volume " + tagihans.get(position).getVolume() + ", Meteran tertulis " + tagihans.get(position).getMeteranBaru());
+            holder.tvTagihan.setText("Tagihan Rp." + tagihans.get(position).getTagihan()  + ",-");
+        }
     }
 
     @Override

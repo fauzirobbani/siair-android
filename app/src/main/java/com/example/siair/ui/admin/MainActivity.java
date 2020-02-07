@@ -11,7 +11,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import com.example.siair.R;
 import com.example.siair.ui.AuthActivity;
@@ -27,14 +26,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_admin);
-
-        String dataLogin = getSharedPreferences("SHARED_PREF", Context.MODE_PRIVATE).getString("DATA_LOGIN", null);
-
-        if (dataLogin == null) {
-            Intent toLogin = new Intent(this, AuthActivity.class);
-            startActivity(toLogin);
-            finish();
-        }
 
         navigation = findViewById(R.id.bn_admin);
         navigation.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener);

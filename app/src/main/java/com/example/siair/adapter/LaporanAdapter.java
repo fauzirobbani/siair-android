@@ -40,8 +40,8 @@ public class LaporanAdapter extends RecyclerView.Adapter<LaporanAdapter.LaporanV
     @Override
     public void onBindViewHolder(@NonNull LaporanViewHolder holder, int position) {
         holder.tvNama.setText(laporans.get(position).getPelanggan().getNama());
-        holder.tvRekening.setText(String.valueOf(laporans.get(position).getPelanggan().getRekening()));
-        holder.tvTagihan.setText("Rp. " + laporans.get(position).getTagihan().getTagihan() + " ,-");
+        holder.tvRekening.setText(laporans.get(position).getPelanggan().getRekening() + " - " + "Volume " + laporans.get(position).getTagihan().getVolume() + ", Meteran tertulis " + laporans.get(position).getTagihan().getMeteranBaru());
+        holder.tvTagihan.setText("Lunas Rp. " + laporans.get(position).getTagihan().getTagihan() + " ,-");
         holder.tvTanggal.setText(String.valueOf(laporans.get(position).getTanggalTransaksi()));
     }
 

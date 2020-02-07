@@ -17,7 +17,6 @@ import android.widget.Toast;
 import com.example.siair.R;
 import com.example.siair.model.LoginRequestBody;
 import com.example.siair.model.User;
-import com.example.siair.ui.admin.MainActivity;
 import com.example.siair.viewmodel.LoginViewModel;
 import com.google.gson.Gson;
 
@@ -91,8 +90,16 @@ public class AuthActivity extends AppCompatActivity {
         SharedPreferences.Editor sharedEditor = getSharedPreferences("SHARED_PREF", Context.MODE_PRIVATE).edit();
         sharedEditor.putString("DATA_LOGIN", jsonLogin);
         sharedEditor.apply();
-        Intent toMain = new Intent(this, MainActivity.class);
-        startActivity(toMain);
+        switch (user.getStatus()) {
+            case "1":
+                Intent toMainAdmin = new Intent(this, com.example.siair.ui.admin.MainActivity.class);
+                startActivity(toMainAdmin);
+                break;
+            default:
+                Intent toMainPelanggan = new Intent(this, com.example.siair.ui.pelanggan.MainActivity.class);
+                startActivity(toMainPelanggan);
+                break;
+        }
         finish();
     }
 

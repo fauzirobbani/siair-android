@@ -1,7 +1,5 @@
 package com.example.siair.ui.admin;
 
-
-import android.nfc.Tag;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -11,8 +9,8 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,6 +33,7 @@ public class TagihanFragment extends Fragment {
     RecyclerView rvTagihan;
     TagihanAdapter tagihanAdapter;
     ProgressBar pbTagihanAll;
+    SwipeRefreshLayout swipeRefreshLayout;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -49,6 +48,7 @@ public class TagihanFragment extends Fragment {
 
         rvTagihan = (RecyclerView) view.findViewById(R.id.rv_tagihan);
         pbTagihanAll = (ProgressBar) view.findViewById(R.id.pb_tagihan_all);
+        swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.refresh_tagihan);
 
         tagihanViewModel = ViewModelProviders.of(this).get(TagihanViewModel.class);
 
@@ -74,12 +74,23 @@ public class TagihanFragment extends Fragment {
             }
         });
 
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                getTagihan();
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
+
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
         rvTagihan.setLayoutManager(layoutManager);
-        tagihanAdapter = new TagihanAdapter(getActivity().getApplicationContext());
+        tagihanAdapter = new TagihanAdapter(getActivity().getApplicationContext(), false);
 
+        getTagihan();
+    }
+
+    private void getTagihan () {
         tagihanViewModel.setTagihanAll();
-
     }
 
     private void getTagihanSuccess (ArrayList<Tagihan> tagihans) {
@@ -92,10 +103,12 @@ public class TagihanFragment extends Fragment {
     }
 
     private void showLoading () {
+        rvTagihan.setVisibility(View.GONE);
         pbTagihanAll.setVisibility(View.VISIBLE);
     }
 
     private void hideLoading () {
         pbTagihanAll.setVisibility(View.GONE);
+        rvTagihan.setVisibility(View.VISIBLE);
     }
 }

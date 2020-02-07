@@ -42,6 +42,10 @@ public class Tagihan {
     @Expose
     private Pelanggan pelanggan;
 
+    @SerializedName("transaksi")
+    @Expose
+    private Transaksi transaksi;
+
     public int getId() {
         return id;
     }
@@ -138,4 +142,11 @@ public class Tagihan {
         this.pelanggan = pelanggan;
     }
 
+    public Transaksi getTransaksi() {
+        return transaksi;
+    }
+
+    public void setTransaksi(Transaksi transaksi) {
+        this.transaksi = transaksi;
+    }
 }
